@@ -111,7 +111,7 @@ function ProductRegistration() {
                   </FloatingLabel>
                 </Col>
 
-                <Col sm="12" md="6" lg="8">
+                <Col sm="12" md="6" lg="4">
                   <FloatingLabel controlId="descripcion" label="Descripcion">
                     <Form.Control
                       type="text"
