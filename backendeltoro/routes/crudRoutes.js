@@ -444,6 +444,7 @@ router.delete('/cliente/delete/:id', (req, res) => {
 
 
 
+
   
 
     return router;
