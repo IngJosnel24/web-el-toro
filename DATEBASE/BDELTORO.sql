@@ -1,6 +1,14 @@
 CREATE DATABASE eltoro;
 USE eltoro;
 
+
+CREATE TABLE Usuario (
+  id_Usuario Int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre_Usuario Varchar(30) NOT NULL,
+  contrasena Varchar(16) NOT NULL,
+  rol Varchar(20) NOT NULL
+);
+
 CREATE TABLE producto (
   id_producto INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(15),
