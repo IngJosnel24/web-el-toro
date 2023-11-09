@@ -3,7 +3,7 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function ProductRegistration() {
+function ProductRegistration({rol}) {
   // Create a state for each field in the form
   const [nombre, setNombre] = useState('');
   const [precioCompra, setPrecioCompra] = useState('');
@@ -57,7 +57,7 @@ function ProductRegistration() {
 
   return (
     <div>
-      <Header />
+      <Header rol={rol}/>
 
       <Container>
         <Card className="mt-3">

@@ -369,6 +369,80 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.get('/cliente/read', (req, res) => {
+  // Consulta para obtener todos los clientes
+  const sql = 'SELECT * FROM cliente';
+
+  // Ejecutar consulta
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error al leer clientes:', err);
+      res.status(500).json({ error: 'Error al leer clientes' });
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+router.post('/cliente/create', (req, res) => {
+  const { nombres, apellidos, direccion, cedula, telefono, correo } = req.body;
+
+  if (!nombres || !apellidos || !direccion || !cedula || !telefono || !correo) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
+
+  const sql = 'INSERT INTO cliente (nombres, apellidos, direccion, cedula, telefono, correo) VALUES (?, ?, ?, ?, ?, ?)';
+  const values = [nombres, apellidos, direccion, cedula, telefono, correo];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Error al insertar cliente:', err);
+      res.status(500).json({ error: 'Error al insertar cliente' });
+    } else {
+      res.status(201).json({ message: 'Cliente creado con éxito' });
+    }
+  });
+});
+
+router.put('/cliente/update/:id', (req, res) => {
+  const id = req.params.id;
+  const { nombres, apellidos, direccion, cedula, telefono, correo } = req.body;
+
+  if (!nombres || !apellidos || !direccion || !cedula || !telefono || !correo) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
+
+  const sql = 'UPDATE cliente SET nombres = ?, apellidos = ?, direccion = ?, cedula = ?, telefono = ?, correo = ? WHERE id_Cliente = ?';
+  const values = [nombres, apellidos, direccion, cedula, telefono, correo, id];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Error al actualizar cliente:', err);
+      res.status(500).json({ error: 'Error al actualizar cliente' });
+    } else {
+      res.status(200).json({ message: 'Cliente actualizado con éxito' });
+    }
+  });
+});
+
+router.delete('/cliente/delete/:id', (req, res) => {
+  const id = req.params.id;
+
+  const sql = 'DELETE FROM cliente WHERE id_Cliente = ?';
+
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error('Error al eliminar cliente:', err);
+      res.status(500).json({ error: 'Error al eliminar cliente' });
+    } else {
+      res.status(200).json({ message: 'Cliente eliminado con éxito' });
+    }
+  });
+});
+
+
+
+
 
   
 

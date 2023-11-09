@@ -35,11 +35,11 @@ function Header({ rol }) {
   
                 <NavDropdown title="Clientes" id="clientes">
                   <NavDropdown.Item>
-                    <Link to="/customer" className="link-unstyled">Compra en Línea</Link>
+                    <Link to="/cliente" className="link-unstyled">Registrar Cliente</Link>
                   </NavDropdown.Item>
   
                   <NavDropdown.Item>
-                    <Link to="/actualizar-cliente" className="link-unstyled">Listar Clientes</Link>
+                    <Link to="/clientelist" className="link-unstyled">Listar Clientes</Link>
                   </NavDropdown.Item>
                 </NavDropdown>
   

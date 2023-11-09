@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Card, Row, Col, Form, Modal, FloatingLabel  } from 'react-bootstrap';
 import Header from '../components/Header';
 
-function ProductList() {
+function ProductList({rol}) {
   const [productos, setProductos] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProducto, setSelectedProducto] = useState({});
@@ -86,7 +86,7 @@ function ProductList() {
 
   return (
     <div>
-      <Header />
+      <Header rol={rol}/>
 
       <Card className="m-3">
         <Card.Body>
