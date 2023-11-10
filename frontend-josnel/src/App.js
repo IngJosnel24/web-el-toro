@@ -7,6 +7,8 @@ import Producto from './pages/ProductoList';
 import Cliente from './pages/Cliente';
 import ClienteList from './pages/ClienteList';
 import Login from './pages/Login';
+import Categoria from './pages/Categoria';
+import CategoriaList from './pages/CategoriaList';
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
         <Route path="/productolist" element={<Producto rol={userRol} />} />
         <Route path="/cliente" element={<Cliente rol={userRol} />} />
         <Route path="/clientelist" element={<ClienteList rol={userRol} />} />
+        <Route path="/categoria" element={<Categoria rol={userRol} />} />
+        <Route path="/categorialist" element={<CategoriaList rol={userRol} />} />
       </Routes>
     </Router>
   );

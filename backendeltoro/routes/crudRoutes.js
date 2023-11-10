@@ -19,77 +19,77 @@ curl -X DELETE http://localhost:5000/crud/producto/delete/1
  */
 
     // Rutas CRUD para la tabla "producto"
-router.get('/producto/read', (req, res) => {
-    // Consulta para obtener todos los productos
-    const sql = 'SELECT * FROM producto';
-    
-    // Ejecutar consulta
-    db.query(sql, (err, result) => {
-      if (err) {
-        console.error('Error al leer productos:', err);
-        res.status(500).json({ error: 'Error al leer productos' });
-      } else {
-        res.status(200).json(result);
-      }
-    });
+    router.get('/producto/read', (req, res) => {
+      // Consulta para obtener todos los productos
+      const sql = 'SELECT id_producto, nombre, precio_compra, precio_venta, descripcion, cantidad, imagen, Categoria FROM producto';
+      
+      // Ejecutar consulta
+      db.query(sql, (err, result) => {
+        if (err) {
+          console.error('Error al leer productos:', err);
+          res.status(500).json({ error: 'Error al leer productos' });
+        } else {
+          res.status(200).json(result);
+        }
+      });
   });
   
   router.post('/producto/create', (req, res) => {
-    const { nombre, precio_compra, precio_venta, descripcion, cantidad, Categoria } = req.body;
+      const { nombre, precio_compra, precio_venta, descripcion, cantidad, imagen, Categoria } = req.body;
   
-    if (!nombre || !precio_compra || !precio_venta || !descripcion || !cantidad || !Categoria) {
-      return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-    }
-  
-    const sql = 'INSERT INTO producto (nombre, precio_compra, precio_venta, descripcion, cantidad, Categoria) VALUES (?, ?, ?, ?, ?, ?)';
-    const values = [nombre, precio_compra, precio_venta, descripcion, cantidad, Categoria];
-  
-    db.query(sql, values, (err, result) => {
-      if (err) {
-        console.error('Error al insertar producto:', err);
-        res.status(500).json({ error: 'Error al insertar producto' });
-      } else {
-        res.status(201).json({ message: 'Producto creado con éxito' });
+      if (!nombre || !precio_compra || !precio_venta || !descripcion || !cantidad || !imagen || !Categoria) {
+          return res.status(400).json({ error: 'Todos los campos son obligatorios' });
       }
-    });
+  
+      const sql = 'INSERT INTO producto (nombre, precio_compra, precio_venta, descripcion, cantidad, imagen, Categoria) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      const values = [nombre, precio_compra, precio_venta, descripcion, cantidad, imagen, Categoria];
+  
+      db.query(sql, values, (err, result) => {
+          if (err) {
+              console.error('Error al insertar producto:', err);
+              res.status(500).json({ error: 'Error al insertar producto' });
+          } else {
+              res.status(201).json({ message: 'Producto creado con éxito' });
+          }
+      });
   });
   
   router.put('/producto/update/:id', (req, res) => {
-    const id = req.params.id;
-    const { nombre, precio_compra, precio_venta, descripcion, cantidad, Categoria } = req.body;
+      const id = req.params.id;
+      const { nombre, precio_compra, precio_venta, descripcion, cantidad, imagen, Categoria } = req.body;
   
-    if (!nombre || !precio_compra || !precio_venta || !descripcion || !cantidad || !Categoria) {
-      return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-    }
-  
-    const sql = 'UPDATE producto SET nombre = ?, precio_compra = ?, precio_venta = ?, descripcion = ?, cantidad = ?, Categoria = ? WHERE id_producto = ?';
-    const values = [nombre, precio_compra, precio_venta, descripcion, cantidad, Categoria, id];
-  
-    db.query(sql, values, (err, result) => {
-      if (err) {
-        console.error('Error al actualizar producto:', err);
-        res.status(500).json({ error: 'Error al actualizar producto' });
-      } else {
-        res.status(200).json({ message: 'Producto actualizado con éxito' });
+      if (!nombre || !precio_compra || !precio_venta || !descripcion || !cantidad || !imagen || !Categoria) {
+          return res.status(400).json({ error: 'Todos los campos son obligatorios' });
       }
-    });
+  
+      const sql = 'UPDATE producto SET nombre = ?, precio_compra = ?, precio_venta = ?, descripcion = ?, cantidad = ?, imagen = ?, Categoria = ? WHERE id_producto = ?';
+      const values = [nombre, precio_compra, precio_venta, descripcion, cantidad, imagen, Categoria, id];
+  
+      db.query(sql, values, (err, result) => {
+          if (err) {
+              console.error('Error al actualizar producto:', err);
+              res.status(500).json({ error: 'Error al actualizar producto' });
+          } else {
+              res.status(200).json({ message: 'Producto actualizado con éxito' });
+          }
+      });
   });
   
   router.delete('/producto/delete/:id', (req, res) => {
-    const id = req.params.id;
+      const id = req.params.id;
   
-    const sql = 'DELETE FROM producto WHERE id_producto = ?';
+      const sql = 'DELETE FROM producto WHERE id_producto = ?';
   
-    db.query(sql, [id], (err, result) => {
-      if (err) {
-        console.error('Error al eliminar producto:', err);
-        res.status(500).json({ error: 'Error al eliminar producto' });
-      } else {
-        res.status(200).json({ message: 'Producto eliminado con éxito' });
-      }
-    });
+      db.query(sql, [id], (err, result) => {
+          if (err) {
+              console.error('Error al eliminar producto:', err);
+              res.status(500).json({ error: 'Error al eliminar producto' });
+          } else {
+              res.status(200).json({ message: 'Producto eliminado con éxito' });
+          }
+      });
   });
-
+  
  /*  # Leer todos los consumibles
 curl http://localhost:5000/crud/consumibles/read
 

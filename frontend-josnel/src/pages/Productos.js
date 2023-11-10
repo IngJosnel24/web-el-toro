@@ -3,13 +3,14 @@ import { Form, Row, Col, Container, FloatingLabel, Card, Button } from 'react-bo
 import Header from '../components/Header';
 import '../styles/App.css';
 
-function ProductRegistration({rol}) {
+function ProductRegistration({ rol }) {
   // Create a state for each field in the form
   const [nombre, setNombre] = useState('');
   const [precioCompra, setPrecioCompra] = useState('');
   const [precioVenta, setPrecioVenta] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [cantidad, setCantidad] = useState('');
+  const [imagen, setImagen] = useState('');
   const [categoria, setCategoria] = useState('');
 
   // Function to handle form submission
@@ -23,6 +24,7 @@ function ProductRegistration({rol}) {
       precio_venta: precioVenta,
       descripcion,
       cantidad,
+      imagen,
       Categoria: categoria,
     };
 
@@ -45,6 +47,7 @@ function ProductRegistration({rol}) {
         setPrecioVenta('');
         setDescripcion('');
         setCantidad('');
+        setImagen('');
         setCategoria('');
       } else {
         alert('Error al registrar producto');
@@ -54,10 +57,23 @@ function ProductRegistration({rol}) {
       alert('Error in the server request');
     }
   };
+  const handleImagenChange = (event) => {
+    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result; // Obtener la imagen en formato base64
+      setImagen(base64String); // Guardado imagen en variable de estado
+    };
+    if (file) {
+      reader.readAsDataURL(file); // Lee el contenido del archivo como base64
+    }
+  };
+
 
   return (
     <div>
-      <Header rol={rol}/>
+      <Header rol={rol} />
 
       <Container>
         <Card className="mt-3">
@@ -112,14 +128,14 @@ function ProductRegistration({rol}) {
                 </Col>
 
                 <Col sm="12" md="6" lg="4">
-                  <FloatingLabel controlId="descripcion" label="Descripcion">
+                  <Form.Group controlId="imagen" className="" >
                     <Form.Control
-                      type="text"
-                      placeholder="Enter description"
-                      value={descripcion}
-                      onChange={(e) => setDescripcion(e.target.value)}
+                      type="file"
+                      accept=".jpg, .png, .jpeg"
+                      size="lg"
+                      onChange={handleImagenChange}
                     />
-                  </FloatingLabel>
+                  </Form.Group>
                 </Col>
 
                 <Col sm="12" md="6" lg="4">
@@ -132,6 +148,18 @@ function ProductRegistration({rol}) {
                     />
                   </FloatingLabel>
                 </Col>
+
+                <Col sm="12" md="6" lg="12">
+                  <FloatingLabel controlId="descripcion" label="Descripcion">
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter description"
+                      value={descripcion}
+                      onChange={(e) => setDescripcion(e.target.value)}
+                    />
+                  </FloatingLabel>
+                </Col>
+
               </Row>
               <div className="center-button">
                 <Button variant="primary" type="submit" className="mt-3" size="lg">

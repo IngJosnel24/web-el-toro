@@ -12,6 +12,7 @@ function ProductList({rol}) {
     precio_venta: '',
     descripcion: '',
     cantidad: '',
+    imagen:'',
     Categoria: '',
   });
 
@@ -25,9 +26,25 @@ function ProductList({rol}) {
       precio_venta: producto.precio_venta,
       descripcion: producto.descripcion,
       cantidad: producto.cantidad,
+      imagen: producto.imagen,
       Categoria: producto.Categoria,
     });
     setShowModal(true);
+  };
+  const handleImagenChange = (event) => {
+    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
+  
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result; // Obtener la imagen en formato base64
+      setFormData({
+        ...formData,
+        imagen: base64String
+      });
+    }; 
+    if (file) {
+      reader.readAsDataURL(file); // Lee el contenido del archivo como base64
+    }
   };
 
   // Function to handle form changes
@@ -100,6 +117,7 @@ function ProductList({rol}) {
                 <th>Precio de Venta</th>
                 <th>Descripción</th>
                 <th>Cantidad</th>
+                <th>Imagen</th>
                 <th>Categoría</th>
                 <th>Acciones</th>
               </tr>
@@ -113,6 +131,10 @@ function ProductList({rol}) {
                   <td>{producto.precio_venta}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.cantidad}</td>
+                  <td>
+                  {/* Muestra la imagen en base64 */}
+                  <img src={producto.imagen} alt={producto.nombre} style={{ width: '50px' }} />
+                </td>
                   <td>{producto.Categoria}</td>
                   <td>
                     <Button variant="primary" onClick={() => openModal(producto)}>Actualizar</Button>
@@ -151,7 +173,6 @@ function ProductList({rol}) {
                     <FloatingLabel controlId="precio_compra" label="Precio de Compra">
                       <Form.Control
                         type="number"
-                        step="0.01"
                         placeholder="Ingrese el precio de compra"
                         name="precio_compra"
                         value={formData.precio_compra}
@@ -173,18 +194,6 @@ function ProductList({rol}) {
                     </FloatingLabel>
                   </Col>
 
-                  <Col sm="12" md="6" lg="8">
-                    <FloatingLabel controlId="descripcion" label="Descripción">
-                      <Form.Control 
-                        type="text" 
-                        placeholder="Ingrese la descripción"
-                        name="descripcion"
-                        value={formData.descripcion}
-                        onChange={handleFormChange} 
-                      />
-                    </FloatingLabel>
-                  </Col>
-
                   <Col sm="12" md="6" lg="4">
                     <FloatingLabel controlId="cantidad" label="Cantidad">
                       <Form.Control 
@@ -197,6 +206,18 @@ function ProductList({rol}) {
                     </FloatingLabel>
                   </Col>
 
+                  <Col sm="12" md="12" lg="4">
+                    <Form.Group controlId="imagen" className="" >
+                      <Form.Control 
+                        type="file" 
+                        accept=".jpg, .png, .jpeg"
+                        size="lg"
+                        name="imagen"
+                        onChange={handleImagenChange}
+                      />
+                    </Form.Group>
+                  </Col>
+
                   <Col sm="12" md="6" lg="4">
                     <FloatingLabel controlId="Categoria" label="Categoría">
                       <Form.Control 
@@ -204,6 +225,18 @@ function ProductList({rol}) {
                         placeholder="Ingrese la categoría"
                         name="Categoria"
                         value={formData.Categoria}
+                        onChange={handleFormChange} 
+                      />
+                    </FloatingLabel>
+                  </Col>
+
+                  <Col sm="12" md="6" lg="12">
+                    <FloatingLabel controlId="descripcion" label="Descripción">
+                      <Form.Control 
+                        type="text" 
+                        placeholder="Ingrese la descripción"
+                        name="descripcion"
+                        value={formData.descripcion}
                         onChange={handleFormChange} 
                       />
                     </FloatingLabel>

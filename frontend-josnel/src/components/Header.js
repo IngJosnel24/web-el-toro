@@ -37,7 +37,7 @@ function Header({ rol }) {
                   <NavDropdown.Item>
                     <Link to="/cliente" className="link-unstyled">Registrar Cliente</Link>
                   </NavDropdown.Item>
-  
+                  <NavDropdown.Divider />
                   <NavDropdown.Item>
                     <Link to="/clientelist" className="link-unstyled">Listar Clientes</Link>
                   </NavDropdown.Item>
@@ -47,10 +47,34 @@ function Header({ rol }) {
                   <NavDropdown.Item>
                     <Link to="/producto" className="link-unstyled">Registrar Producto</Link>
                   </NavDropdown.Item>
-  
+
+                  <NavDropdown.Item>
+                    <Link to="/categoria" className="link-unstyled">Registrar Categoria</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
                   <NavDropdown.Item>
                     <Link to="/productolist" className="link-unstyled">Lista Productos</Link>
                   </NavDropdown.Item>
+                  
+                  <NavDropdown.Item>
+                    <Link to="/categorialist" className="link-unstyled">Lista Categorias</Link>
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item>
+                    <Link to="/categorialist" className="link-unstyled">Galeria de Productos</Link>
+                  </NavDropdown.Item>
+
+                </NavDropdown>
+
+                <NavDropdown title="venta" id="ventas">
+                  <NavDropdown.Item>
+                    <Link to="/venta" className="link-unstyled">Registrar venta</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item>
+                    <Link to="/ventalist" className="link-unstyled">Lista ventas</Link>
+                  </NavDropdown.Item>
+                  
                 </NavDropdown>
   
               </Nav>
@@ -137,7 +161,7 @@ function Header({ rol }) {
                   </NavDropdown.Item>
   
                   <NavDropdown.Item>
-                    <Link to="/actualizar-cliente" className="link-unstyled">Listar Clientes</Link>
+                    <Link to="/clientelist" className="link-unstyled">Listar Clientes</Link>
                   </NavDropdown.Item>
                 </NavDropdown>
   
