@@ -173,6 +173,7 @@ function ProductList({rol}) {
                     <FloatingLabel controlId="precio_compra" label="Precio de Compra">
                       <Form.Control
                         type="number"
+                        step="0.01"
                         placeholder="Ingrese el precio de compra"
                         name="precio_compra"
                         value={formData.precio_compra}

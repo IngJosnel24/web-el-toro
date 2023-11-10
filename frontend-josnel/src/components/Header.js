@@ -70,7 +70,9 @@ function Header({ rol }) {
                   <NavDropdown.Item>
                     <Link to="/venta" className="link-unstyled">Registrar venta</Link>
                   </NavDropdown.Item>
+                  
                   <NavDropdown.Divider />
+
                   <NavDropdown.Item>
                     <Link to="/ventalist" className="link-unstyled">Lista ventas</Link>
                   </NavDropdown.Item>
